@@ -2,7 +2,7 @@
 # application.properties está no .gitignore — nunca commitar credenciais reais.
 
 spring.application.name=task-manager-api
-server.port=8080
+server.port=${PORT:8080}
 
 spring.datasource.url=jdbc:postgresql://aws-1-sa-east-1.pooler.supabase.com:6543/postgres
 spring.datasource.username=postgres.SEU_PROJETO_SUPABASE
