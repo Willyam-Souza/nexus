@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@theme {
+  /* Dark mode por omissão — preto puro à Apple, não o cinzento-arroxeado de template */
+  --color-background: #000000;
+  --color-surface: #1c1c1e;
+  --color-surface-raised: #2c2c2e;
+  --color-border-subtle: rgba(255, 255, 255, 0.1);
+  --color-fill: rgba(255, 255, 255, 0.08);
+  --color-fill-strong: rgba(255, 255, 255, 0.14);
+
+  --color-accent-start: #2997ff;
+  --color-accent-end: #2997ff;
+  --color-accent-glow: rgba(41, 151, 255, 0.35);
+
+  --color-text-primary: #f5f5f7;
+  --color-text-muted: #98989d;
+
+  --color-success: #30d158;
+  --color-danger: #ff453a;
+  --color-warning: #ff9f0a;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
+
+  --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Light mode — sobrescreve as variáveis do :root definidas em @theme.
+   Como todas as utilities do Tailwind (bg-background, text-text-primary...)
+   referenciam estas custom properties, basta trocar os valores aqui. */
+:root[data-theme='light'] {
+  --color-background: #f5f5f7;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-border-subtle: rgba(0, 0, 0, 0.08);
+  --color-fill: rgba(0, 0, 0, 0.045);
+  --color-fill-strong: rgba(0, 0, 0, 0.075);
+
+  --color-accent-start: #0071e3;
+  --color-accent-end: #0071e3;
+  --color-accent-glow: rgba(0, 113, 227, 0.25);
+
+  --color-text-primary: #1d1d1f;
+  --color-text-muted: #6e6e73;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s var(--ease-apple), color 0.4s var(--ease-apple);
+}
+
+/* Scrollbar customizada — discreta */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-subtle);
+  border-radius: 999px;
+}
+
+/* Deriva das manchas de fundo — CSS puro (não Framer Motion) para não gerar
+   trabalho em JS a cada frame por baixo de elementos com backdrop-blur, que
+   é o combo mais caro de repintar. O browser pode compor isto isoladamente. */
+@keyframes drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, 3%, 0) scale(1.08); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-4%, -3%, 0) scale(1.05); }
+}
+.animate-drift-a { animation: drift-a 18s ease-in-out infinite; will-change: transform; }
+.animate-drift-b { animation: drift-b 22s ease-in-out infinite; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

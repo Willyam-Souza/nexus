@@ -1,0 +1,21 @@
+# Copie este ficheiro para "application.properties" e preencha com as suas credenciais reais.
+# application.properties está no .gitignore — nunca commitar credenciais reais.
+
+spring.application.name=task-manager-api
+server.port=8080
+
+spring.datasource.url=jdbc:postgresql://aws-1-sa-east-1.pooler.supabase.com:6543/postgres
+spring.datasource.username=postgres.SEU_PROJETO_SUPABASE
+spring.datasource.password=SUA_PASSWORD_AQUI
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# Gere um segredo próprio, por exemplo com: openssl rand -base64 48
+app.jwt.secret=GERE_UM_SEGREDO_ALEATORIO_AQUI
+
+# Em produção, defina para o domínio real do frontend (ex: https://seu-app.vercel.app)
+app.cors.allowed-origins=http://localhost:*
