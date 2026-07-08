@@ -18,4 +18,5 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 app.jwt.secret=GERE_UM_SEGREDO_ALEATORIO_AQUI
 
 # Em produção, defina para o domínio real do frontend (ex: https://seu-app.vercel.app)
-app.cors.allowed-origins=http://localhost:*
+# Variável de ambiente correspondente: APP_CORS_ORIGINS
+app.cors.origins=http://localhost:*

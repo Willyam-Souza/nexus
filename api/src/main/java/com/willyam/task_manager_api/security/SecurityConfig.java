@@ -26,9 +26,12 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     // Lista de origens separadas por vírgula — em dev fica solto para qualquer porta local;
-    // em produção (Render) definimos isto via variável de ambiente APP_CORS_ALLOWED_ORIGINS
+    // em produção (Render) definimos isto via variável de ambiente APP_CORS_ORIGINS
     // apontando só para o domínio real do frontend no Vercel.
-    @Value("${app.cors.allowed-origins:http://localhost:*}")
+    // (Nome sem hífen de propósito: o binding relaxado do Spring remove hífens ao mapear
+    // para variável de ambiente, então "allowed-origins" viraria ALLOWEDORIGINS, não
+    // ALLOWED_ORIGINS — já caímos nessa pegadinha uma vez.)
+    @Value("${app.cors.origins:http://localhost:*}")
     private String allowedOrigins;
 
     @Autowired
