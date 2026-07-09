@@ -24,6 +24,9 @@ export default function Input({ label, icon: Icon, error, type, ...props }) {
         <input
           {...props}
           type={inputType}
+          data-gramm="false"
+          data-gramm_editor="false"
+          data-enable-grammarly="false"
           className="w-full min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/60 outline-none"
         />
         {isPassword && (
